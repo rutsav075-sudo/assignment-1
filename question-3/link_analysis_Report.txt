@@ -1,0 +1,10 @@
+File System and Link Analysis Report
+
+1. Link Comparison:
+   A hard link acts as a direct pointer to the underlying data (inode) on the drive, sharing the exact same inode as the original. A symbolic link is a separate file that merely stores the text path to the original file.
+
+2. Deletion Effects:
+   When original_file.txt was deleted, the data remained accessible via hard_link.txt because the data is only removed when the link count reaches zero. However, sym_link.txt became a broken link and threw an error when accessed, as the original path was gone.
+
+Conclusion:
+Hard links are useful for preserving data access even if the original file name is removed, but they cannot span across different file systems. Symbolic links are more flexible and can link to directories, but they break if the original file is deleted or moved.

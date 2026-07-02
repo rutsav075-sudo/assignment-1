@@ -1,0 +1,82 @@
+================================================================================
+                       SECURE PROJECT WORKSPACE REPORT
+================================================================================
+
+1. DIRECTORY STRUCTURE CREATED
+--------------------------------------------------------------------------------
+The project workspace was established under the path: /home/utsav/secure_project
+The internal structure isolates project data into logical segments:
+
+secure_project/
+├── files/          # For active working project documents
+└── documentation/  # For formal project manuals and specifications
+
+Commands executed to create structure:
+$ mkdir -p ~/secure_project/files ~/secure_project/documentation
+$ touch ~/secure_project/files/sample_data.txt
+$ touch ~/secure_project/documentation/spec.md
+
+
+2. UMASK VALUE USED
+--------------------------------------------------------------------------------
+Default System Umask: 0022
+
+Explanation:
+A umask of 0022 ensures that newly created directories default to permissions 
+755 (drwxr-xr-x) and newly created files default to 644 (-rw-r--r--). This 
+prevents other users on the system from modifying files by default.
+
+
+3. FILE PERMISSIONS BEFORE AND AFTER MODIFICATION
+--------------------------------------------------------------------------------
+To secure the environment against unauthorized read/write access by non-team 
+members, the permissions were restricted.
+
+[BEFORE MODIFICATION (Default via Umask 0022)]
+--------------------------------------------------------------------------------
+drwxr-xr-x  utsav kali  secure_project/
+drwxr-xr-x  utsav kali  ├── files/
+-rw-r--r--  utsav kali  │   └── sample_data.txt
+drwxr-xr-x  utsav kali  └── documentation/
+-rw-r--r--  utsav kali      └── spec.md
+
+Commands executed for restriction:
+$ chmod 700 ~/secure_project
+$ chmod 700 ~/secure_project/files
+$ chmod 700 ~/secure_project/documentation
+$ chmod 600 ~/secure_project/files/sample_data.txt
+$ chmod 600 ~/secure_project/documentation/spec.md
+
+[AFTER MODIFICATION (Secured Workspace)]
+--------------------------------------------------------------------------------
+drwx------  utsav kali  secure_project/
+drwx------  utsav kali  ├── files/
+-rw-------  utsav kali  │   └── sample_data.txt
+drwx------  utsav kali  └── documentation/
+-rw-------  utsav kali      └── spec.md
+
+
+4. OWNERSHIP DETAILS
+--------------------------------------------------------------------------------
+Owner User:  utsav
+Owner Group: kali
+
+Verification command: 
+$ ls -la ~/secure_project
+
+Output confirmation:
+All files and subdirectories are strictly owned by user 'utsav' and group 'kali', 
+ensuring access control handles map correctly to the active administrator account.
+
+
+5. EXPLANATION OF HOW PERMISSIONS PROTECT PROJECT DATA
+--------------------------------------------------------------------------------
+* Principle of Least Privilege: By modifying permissions from 755/644 to 700/600, 
+  we strip all read (r), write (w), and execute (x) permissions from both group 
+  members ('kali') and other system users ('others').
+* Directory Level Defense: Restricting the parent directory (`secure_project/`) 
+  to `drwx------` prevents any other user from even listing (`ls`) or entering 
+  (`cd`) the workspace, neutralizing unauthorized data exposure.
+* Integrity Protection: Preventing write access ensures no unauthorized software 
+  or local user can modify, tamper with, or delete critical project assets.
+================================================================================

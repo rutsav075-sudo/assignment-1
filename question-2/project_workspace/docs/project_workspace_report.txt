@@ -1,0 +1,35 @@
+======================================================================
+                    SECURE PROJECT WORKSPACE REPORT                   
+======================================================================
+
+1. DIRECTORY STRUCTURE CREATED:
+   project_workspace/
+   ├── code/
+   └── docs/
+       └── design.txt
+
+2. FILE PERMISSIONS BEFORE AND AFTER MODIFICATION:
+   - Before (Default): drwxr-xr-x  (Workspace Directory)
+                       -rw-r--r--  (design.txt File)
+                       
+   - After (Secured):  drwxrwx---  (Workspace Directory)
+                       -rwxrwx---  (design.txt File)
+
+3. OWNERSHIP DETAILS:
+   - Owner Username: utsav
+   - Group Name:     kali
+
+4. UMASK VALUE USED:
+   - System Umask: 022
+
+5. EXPLANATION OF HOW PERMISSIONS PROTECT PROJECT DATA:
+   By establishing an absolute permission profile of '770' (drwxrwx---), 
+   read, write, and directory traversal privileges are restricted 
+   exclusively to the explicit file owner ('utsav') and authorized members 
+   of the primary project group ('kali'). 
+   
+   The general public system tier ("Others") is assigned zero access 
+   privileges ('---'). This prevents unauthorized users from executing local 
+   data snooping, accidental alterations, or data leakage, thereby 
+   securing both the confidentiality and integrity of the project environment.
+======================================================================

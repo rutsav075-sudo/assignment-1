@@ -1,0 +1,17 @@
+File Access and I/O Investigation Report
+
+1. Open Files Identified: 
+   Using lsof, I observed that various system libraries, application files, and shell-related files were open, confirming that running processes require multiple background files.
+
+2. File Descriptor Observations:
+   In /dev/fd, I observed descriptors 0 (stdin), 1 (stdout), and 2 (stderr) which map to the terminal emulator device.
+
+3. Redirection Results:
+   - standard_out.txt: Was created but remained empty because the command failed to execute successfully.
+   - error_out.txt: Successfully captured the error message ("ls: /fake_directory: No such file or directory").
+
+4. Resource Limits:
+   The command ulimit -a revealed system constraints. Notably, the limit for open file descriptors prevents a single user process from exhausting system file handlers.
+
+Explanation of Linux I/O:
+Unix-like systems treat everything, including hardware devices and data streams, as files. The OS manages I/O operations by assigning integer handles called File Descriptors. By manipulating these descriptors using standard redirection operators like '>' and '2>', outputs and errors can be cleanly separated.
